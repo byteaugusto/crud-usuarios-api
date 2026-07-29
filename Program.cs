@@ -1,11 +1,14 @@
 using MinhaPrimeiraApi.Services;
+using MinhaPrimeiraApi.Repositories;
+using MinhaPrimeiraApi.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<UsuarioService>();
+builder.Services.AddScoped<IUsuarioRepositoryInterface, UsuarioRepository>();
+builder.Services.AddScoped<UsuarioService>();
 
 builder.Services.AddCors(options =>
 {

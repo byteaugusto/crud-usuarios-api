@@ -16,9 +16,9 @@ namespace MinhaPrimeiraApi
 
         
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            return Ok(service.Get());
+            return Ok(service.GetAll());
         }
 
         [HttpGet("{id}")]

@@ -1,42 +1,36 @@
-﻿namespace MinhaPrimeiraApi.Services
+﻿using MinhaPrimeiraApi.Interface;
+
+namespace MinhaPrimeiraApi.Services
 {
+    
     public class UsuarioService
+
+   
     {
-        private static List<Usuario> usuarios = new List<Usuario>();
-        public List<Usuario> Get()
+        public UsuarioService(IUsuarioRepositoryInterface repository)
         {
-            return usuarios;
+            this.repository = repository;
+        }
+        private readonly IUsuarioRepositoryInterface repository;
+        public List<Usuario> GetAll()
+        {
+           return repository.GetAll();
         }
         public Usuario Add (Usuario usuario) 
         {
-            usuario.Id = usuarios.Count + 1;
-            usuarios.Add(usuario);
-            return (usuario);
+            return repository.Add(usuario);
         }
         public Usuario Update (int id, Usuario usuario)
         {
-            var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == id);
-            if (usuarioExistente == null)
-            {
-                return null;
-            }
-            usuarioExistente.Nome = usuario.Nome;
-            usuarioExistente.Email = usuario.Email;
-            return (usuarioExistente);
+            return repository.Update(id, usuario);
         }
         public Usuario Delete (int id)
         {
-            var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == id);
-            if (usuarioExistente == null)
-            {
-                return null;
-            }
-            usuarios.Remove(usuarioExistente);
-            return (usuarioExistente);
+            return repository.Delete(id);
         }
         public Usuario GetById (int id)
         {
-            return usuarios.FirstOrDefault(u => u.Id == id);
+            return repository.GetById(id);
         }
     }
 }
