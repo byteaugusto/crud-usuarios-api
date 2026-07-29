@@ -12,7 +12,8 @@ API REST desenvolvida com **ASP.NET Core** para gerenciamento de usuários, apli
 
 Este projeto simula uma API real de cadastro de usuários, com foco em:
 
-* Estrutura profissional (Controller + Service)
+* Estrutura profissional (Controller + Service + Repository)
+* Uso de interfaces para abstração de dependências
 * Injeção de dependência
 * Boas práticas REST
 * Organização de código limpa e escalável
@@ -26,6 +27,8 @@ Este projeto simula uma API real de cadastro de usuários, com foco em:
 * 📄 Swagger (OpenAPI)
 * 🔧 .NET 6+
 * 🧠 Programação Orientada a Objetos (POO)
+* 🧩 Injeção de Dependência (Dependency Injection)
+* 🗂️ Arquitetura em Camadas (Controller, Service, Repository)
 
 ---
 
@@ -62,10 +65,14 @@ MinhaPrimeiraApi/
 ├── Services/
 │   └── UsuarioService.cs
 │
+├── Repositories/
+│   └── UsuarioRepository.cs
+
+├── Interface/
+│   └── IUsuarioRepositoryInterface.cs
+
 ├── Models/
 │   └── Usuario.cs
-│
-├── Program.cs
 ```
 
 ---
@@ -90,10 +97,15 @@ cd MinhaPrimeiraApi
 dotnet run
 ```
 
+Ou usando hot reload:
+```bash
+dotnet watch run
+```
+
 4. Acesse a documentação Swagger:
 
 ```
-https://localhost:7245/swagger/index.html
+https://localhost:7245/swagger/index.html (ou a porta que aparecer para você)
 ```
 
 ---
