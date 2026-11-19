@@ -1,44 +1,53 @@
-﻿using MinhaPrimeiraApi.Interface;
+﻿using MinhaPrimeiraApi.Data;
+using MinhaPrimeiraApi.Interface;
 
 namespace MinhaPrimeiraApi.Repositories
 {
     public class UsuarioRepository : IUsuarioRepositoryInterface
     {
-            private static List<Usuario> usuarios = new List<Usuario>();
+        private readonly AppDbContext _appDbContext;
+        public UsuarioRepository(AppDbContext context)
+        {
+            _appDbContext = context;
+        }
+
             public List<Usuario> GetAll()
             {
-                return usuarios;
+                return _appDbContext.Usuarios.ToList();
             }
             public Usuario Add(Usuario usuario)
             {
-                usuario.Id = usuarios.Count + 1;
-                usuarios.Add(usuario);
+                _appDbContext.Usuarios.Add(usuario);
+                _appDbContext.SaveChanges();
                 return (usuario);
             }
-            public Usuario Update(int id, Usuario usuario)
+            public Usuario? Update(int id, Usuario usuario)
             {
-                var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == id);
+                var usuarioExistente = _appDbContext.Usuarios.FirstOrDefault(u => u.Id == id);
+               
                 if (usuarioExistente == null)
                 {
                     return null;
                 }
                 usuarioExistente.Nome = usuario.Nome;
                 usuarioExistente.Email = usuario.Email;
+                _appDbContext.SaveChanges();
                 return (usuarioExistente);
             }
-            public Usuario Delete(int id)
+            public Usuario? Delete(int id)
             {
-                var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == id);
+                var usuarioExistente = _appDbContext.Usuarios.FirstOrDefault(u => u.Id == id);
                 if (usuarioExistente == null)
                 {
                     return null;
                 }
-                usuarios.Remove(usuarioExistente);
+                _appDbContext.Remove(usuarioExistente);
+                _appDbContext.SaveChanges();
                 return (usuarioExistente);
             }
-            public Usuario GetById(int id)
+            public Usuario? GetById(int id)
             {
-                return usuarios.FirstOrDefault(u => u.Id == id);
+                return _appDbContext.Usuarios.FirstOrDefault(u => u.Id == id);
             }
         }
     }

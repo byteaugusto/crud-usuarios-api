@@ -1,6 +1,10 @@
-using MinhaPrimeiraApi.Services;
-using MinhaPrimeiraApi.Repositories;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using MinhaPrimeiraApi.Data;
 using MinhaPrimeiraApi.Interface;
+using MinhaPrimeiraApi.Repositories;
+using MinhaPrimeiraApi.Services;
+using MinhaPrimeiraApi.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUsuarioRepositoryInterface, UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioCreateValidator>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
@@ -35,3 +43,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

@@ -1,4 +1,5 @@
 <Solution>
   <Folder Name="/Itens de Solução/" />
+  <Project Path="../MinhaPrimeiraApi.Tests/MinhaPrimeiraApi.Tests.csproj" Id="a03faf41-d1f0-488c-abe4-45a295778ba1" />
   <Project Path="MinhaPrimeiraApi.csproj" />
 </Solution>

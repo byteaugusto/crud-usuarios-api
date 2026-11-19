@@ -5,8 +5,8 @@ namespace MinhaPrimeiraApi.Interface
     {
     List<Usuario> GetAll ();
     Usuario Add(Usuario usuario);
-    Usuario Update(int id, Usuario usuario);
-    Usuario Delete(int id);
-    Usuario GetById(int id);
+    Usuario? Update(int id, Usuario usuario);
+    Usuario? Delete(int id);
+    Usuario? GetById(int id);
     }
 }
